@@ -1,0 +1,51 @@
+﻿@model AutoLogistic.Models.RoutesViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Filter", "Route", FormMethod.Post))
+    {
+    <span> @Html.TextBoxFor(m => m.Filter) </span>
+<span> Prevoznik: @Html.RadioButton("FilterName", "Transporter") </span >
+   <span > Grad: @Html.RadioButton("FilterName", "City") </span >
+      <input name = "Filter" type = "submit" />
+         <table class="table">
+    <tr>
+        <th>
+            Naziv rute
+        </th>
+        <th>
+            Gradovi
+        </th>
+        <th>
+            Prevoznik
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Routes)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Cities[item])
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transporters[item])
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+            </td>
+        </tr>
+    }
+
+</table>
+}
